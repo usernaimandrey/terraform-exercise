@@ -14,4 +14,8 @@ helth-check:
 	ansible all -i inventory.ini -u ubuntu -m ping
 
 ansible-playbook:
-	ansible-playbook $(T) -i inventory.ini -u ubuntu
+	ansible-playbook $(P) -i inventory.ini -u ubuntu -t $(T)
+
+setup-nginx:
+	make ansible-playbook P="playbooks/setup_nginx.yml" T="system"
+	make ansible-playbook P="playbooks/setup_nginx.yml" T="nginx"

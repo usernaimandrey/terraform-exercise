@@ -1,0 +1,38 @@
+- hosts: servers
+
+  tasks:
+    - name: Update cahe
+      ansible.builtin.command: apt update
+      become: yes
+      tags: system
+
+    - name: Install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+      tags: git
+
+    - name: Create group admin
+      ansible.builtin.group:
+        name: admin
+        state: present
+      become: yes
+      tags: group
+
+    - name: Create user Andrey
+      ansible.builtin.user:
+        name: Andrey
+        state: present
+        groups:
+          - admin
+      become: yes
+      tags: user
+
+    - name: Add user ubuntu to group admin
+      ansible.builtin.user:
+        name: ubuntu
+        group: admin
+      become: yes
+      tags: user

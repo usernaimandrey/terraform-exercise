@@ -1,0 +1,38 @@
+---
+- hosts: webservers
+
+  tasks:
+    - name: Update cahe
+      ansible.builtin.command: apt update
+      become: yes
+      tags: system
+
+    - name : Insatll nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      become: yes
+      tags: nginx
+
+    - name: copy index
+      ansible.builtin.copy:
+        src: ../app/index.html
+        dest: /usr/share/nginx/html/index.html 
+      become: yes
+      tags: nginx
+
+    - name: copy config
+      ansible.builtin.copy:
+        src: ../configs/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - restart nginx
+      become: yes
+      tags: nginx
+
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: yes
