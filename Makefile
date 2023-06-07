@@ -8,7 +8,7 @@ import:
 	terraform import -var-file=secrets.tfvars $(T)
 
 create-token:
-	yc iam create-token
+	bin/y_create_token
 
 helth-check:
 	ansible all -i inventory.ini -u ubuntu -m ping

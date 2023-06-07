@@ -1,9 +1,19 @@
 ---
 - hosts: webservers
+  vars:
+    root_dir: /var/tmp/www
+    default_port: 8080
 
   tasks:
     - name: Update cahe
       ansible.builtin.command: apt update
+      become: yes
+      tags: system
+    
+    - name: сreate directory
+      file:
+        path={{root_dir}}
+        state=directory
       become: yes
       tags: system
 
@@ -14,15 +24,15 @@
       become: yes
       tags: nginx
 
-    - name: copy index
-      ansible.builtin.copy:
+    - name: update index
+      ansible.builtin.template:
         src: ../app/index.html
-        dest: /usr/share/nginx/html/index.html 
+        dest: "{{root_dir}}/index.html" 
       become: yes
       tags: nginx
 
-    - name: copy config
-      ansible.builtin.copy:
+    - name: update nginx config
+      ansible.builtin.template:
         src: ../configs/nginx.conf
         dest: /etc/nginx/nginx.conf
       notify:
