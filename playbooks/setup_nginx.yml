@@ -1,21 +1,22 @@
 ---
-- hosts: webservers
+- hosts: servers
+  gather_facts: no
   vars:
     root_dir: /var/tmp/www
     default_port: 8080
 
   tasks:
-    - name: Update cahe
+    - name: Update cache
       ansible.builtin.command: apt update
       become: yes
-      tags: system
+      tags: [system, nginx]
     
     - name: сreate directory
       file:
         path={{root_dir}}
         state=directory
       become: yes
-      tags: system
+      tags: [system, nginx]
 
     - name : Insatll nginx
       ansible.builtin.apt:
