@@ -22,10 +22,16 @@ variable "y_zone" {
   default     = "ru-central1-a"
 }
 
-variable "y_image_id" {
+variable "y_image_id_ubuntu" {
   description = "image ubuntu"
   type        = string
   default     = "fd807ed79a4kkqfvd1mb"
+}
+
+variable "y_image_id_centos" {
+  description = "image centos"
+  type        = string
+  default     = "fd8dgtuscndkp3jmdb82"
 }
 
 variable "y_network_name" {

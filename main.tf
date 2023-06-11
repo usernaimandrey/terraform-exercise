@@ -19,7 +19,7 @@ provider "yandex" {
 #   description = "terraform exercise"
 #  }
 
-resource "yandex_compute_instance" "vm-1" {
+resource "yandex_compute_instance" "webserver" {
   name = var.y_instanse_name_1
 
   resources {
@@ -29,7 +29,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = var.y_image_id
+      image_id = var.y_image_id_ubuntu
     }
   }
 
@@ -39,11 +39,12 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
+    user-data = "${file("./meta.txt")}"
+    # ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
   }
 }
 
-resource "yandex_compute_instance" "vm-2" {
+resource "yandex_compute_instance" "appserver" {
   name = var.y_instanse_name_2
 
   resources {
@@ -53,7 +54,7 @@ resource "yandex_compute_instance" "vm-2" {
 
   boot_disk {
     initialize_params {
-      image_id = var.y_image_id
+      image_id = var.y_image_id_centos
     }
   }
 
@@ -63,7 +64,8 @@ resource "yandex_compute_instance" "vm-2" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
+    user-data = "${file("./meta.txt")}"
+    # ssh-keys = "centos:${file("~/.ssh/id_ed25519.pub")}"
   }
 }
 
@@ -78,18 +80,18 @@ resource "yandex_vpc_subnet" "subnet-1" {
   v4_cidr_blocks = var.y_v4_cidr_blocks
 }
 
-output "internal_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.ip_address
+output "internal_ip_address_webserver" {
+  value = yandex_compute_instance.webserver.network_interface.0.ip_address
 }
 
-output "external_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
+output "external_ip_address_webserver" {
+  value = yandex_compute_instance.webserver.network_interface.0.nat_ip_address
 }
 
-output "internal_ip_address_vm_2" {
-  value = yandex_compute_instance.vm-2.network_interface.0.ip_address
+output "internal_ip_address_appserver" {
+  value = yandex_compute_instance.appserver.network_interface.0.ip_address
 }
 
-output "external_ip_address_vm_2" {
-  value = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
+output "external_ip_address_appserver" {
+  value = yandex_compute_instance.appserver.network_interface.0.nat_ip_address
 }

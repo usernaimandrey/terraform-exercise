@@ -1,21 +1,37 @@
 - hosts: servers
-  gather_facts: no
+  # gather_facts: no
   vars:
     users: 
       - { name: jaime, groups: user }
       - { name: sansa, groups: user }
       - { name: robert, groups: user }
   tasks:
-    - name: Update cahe
+    - name: Update cahe Ubuntu
       ansible.builtin.command: apt update
+      when: ansible_os_family == "Debian"
       become: yes
       tags: system
 
-    - name: Install git
+    - name: Update cache Centos
+      ansible.builtin.command: yum update
+      when: ansible_os_family == "RedHat"
+      become: yes
+      tags: system
+
+    - name: Install git Centos
+      ansible.builtin.yum:
+        name: git
+        state: present
+      when: ansible_os_family == "RedHat"
+      become: yes
+      tags: git
+
+    - name: Install git Ubuntu
       ansible.builtin.apt:
         name: git
         state: present
         update_cache: yes
+      when: ansible_os_family == "Debian"
       become: yes
       tags: git
 
