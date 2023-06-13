@@ -8,6 +8,12 @@
 </head>
 <body>
   <h1>Hello World!</h1>
-  <h2>This server: {{server_name}}</h2>
+  <h2>This server: {{server_name | upper}}</h2>
+  <small>Deployed: {{ansible_date_time.iso8601}}</small>
+  <pre>
+    <code>
+      {{result}}
+    </code>
+  </pre>
 </body>
 </html>

@@ -1,6 +1,6 @@
 ---
-- hosts: servers
-  gather_facts: no
+- hosts: webservers
+  # gather_facts: no
   vars:
     root_dir: /var/tmp/www
     default_port: 8080
@@ -23,6 +23,17 @@
         name: nginx
         state: present
       become: yes
+      tags: nginx
+
+    - name: Install cowsay
+      ansible.builtin.apt:
+        name: cowsay
+        state: present
+      become: yes
+      tags: nginx
+      
+    - ansible.builtin.shell: cowsay "This is server server_name!"
+      register: result
       tags: nginx
 
     - name: update index
