@@ -1,0 +1,11 @@
+- name: Update cahe Ubuntu
+  ansible.builtin.command: apt update
+  when: ansible_os_family == "Debian"
+  become: yes
+  tags: system
+
+- name: Update cache Centos
+  ansible.builtin.command: yum update
+  when: ansible_os_family == "RedHat"
+  become: yes
+  tags: system

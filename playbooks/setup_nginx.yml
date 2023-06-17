@@ -1,60 +1,40 @@
----
-- hosts: webservers
-  # gather_facts: no
-  vars:
-    root_dir: /var/tmp/www
-    default_port: 8080
+- name: сreate directory
+  file:
+    path={{root_dir}}
+    state=directory
+  become: yes
+  tags: [system, nginx]
 
-  tasks:
-    - name: Update cache
-      ansible.builtin.command: apt update
-      become: yes
-      tags: [system, nginx]
-    
-    - name: сreate directory
-      file:
-        path={{root_dir}}
-        state=directory
-      become: yes
-      tags: [system, nginx]
+- name : Insatll nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+  become: yes
+  tags: nginx
 
-    - name : Insatll nginx
-      ansible.builtin.apt:
-        name: nginx
-        state: present
-      become: yes
-      tags: nginx
+- name: Install cowsay
+  ansible.builtin.apt:
+    name: cowsay
+    state: present
+  become: yes
+  tags: nginx
+  
+- ansible.builtin.shell: cowsay "This is server server_name!"
+  register: result
+  tags: nginx
 
-    - name: Install cowsay
-      ansible.builtin.apt:
-        name: cowsay
-        state: present
-      become: yes
-      tags: nginx
-      
-    - ansible.builtin.shell: cowsay "This is server server_name!"
-      register: result
-      tags: nginx
+- name: update index
+  ansible.builtin.template:
+    src: ../app/index.html
+    dest: "{{root_dir}}/index.html" 
+  become: yes
+  tags: nginx
 
-    - name: update index
-      ansible.builtin.template:
-        src: ../app/index.html
-        dest: "{{root_dir}}/index.html" 
-      become: yes
-      tags: nginx
-
-    - name: update nginx config
-      ansible.builtin.template:
-        src: ../configs/nginx.conf
-        dest: /etc/nginx/nginx.conf
-      notify:
-        - restart nginx
-      become: yes
-      tags: nginx
-
-  handlers:
-    - name: restart nginx
-      ansible.builtin.service:
-        name: nginx
-        state: reloaded
-      become: yes
+- name: update nginx config
+  ansible.builtin.template:
+    src: ../configs/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+  become: yes
+  tags: nginx

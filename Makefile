@@ -22,3 +22,6 @@ setup-nginx:
 
 create-users:
 	ansible-playbook playbooks/system.yml -i inventory.ini -u andery
+
+setup-app:
+	ansible-playbook playbooks/main.yml -i inventory.ini -u andery

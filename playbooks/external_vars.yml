@@ -1,0 +1,7 @@
+---
+root_dir: /var/tmp/www
+default_port: 8080
+users_group_1: 
+  - { name: jaime, groups: user }
+  - { name: sansa, groups: user }
+  - { name: robert, groups: user }

@@ -1,0 +1,42 @@
+---
+- hosts: webservers
+  tasks:
+    - name: Update system
+      ansible.builtin.import_tasks:
+        file: update-system.yml
+    - name: Include tasks setup nginx
+      ansible.builtin.import_tasks:
+        file: setup_nginx.yml
+      vars:
+        root_dir: /var/tmp/www
+        default_port: 8080
+  
+  handlers:
+    - name: Import nginx hendler
+      ansible.builtin.import_tasks:
+        file: handlers.yml
+
+- hosts: appservers
+  # gather_facts: no
+  vars_files:
+    - external_vars.yml
+  tasks:
+    - name: Update system
+      ansible.builtin.import_tasks:
+        file: update-system.yml
+    - name: Create users
+      ansible.builtin.import_tasks:
+        file: users.yml
+      vars:
+        users: "{{users_group_1}}"
+    - name: insatall git
+      ansible.builtin.import_tasks:
+        file: install_git.yml
+      vars:
+        users: "{{users_group_1}}"
+        
+
+
+
+
+

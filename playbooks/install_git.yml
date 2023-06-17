@@ -1,0 +1,31 @@
+- name: Install git Centos
+  ansible.builtin.yum:
+    name: git
+    state: present
+  when: ansible_os_family == "RedHat"
+  become: yes
+  tags: git
+
+- name: Install git Ubuntu
+  ansible.builtin.apt:
+    name: git
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+  become: yes
+  tags: git
+
+
+
+- name: Update git config
+  ansible.builtin.template:
+    src: ../files/.gitconfig
+    dest: "/home/{{item.name}}/.gitconfig"
+    group: "{{item.name}}"
+    owner: "{{item.name}}"
+  loop: "{{users}}"
+  become: yes
+  tags: system
+
+    
+

@@ -1,0 +1,36 @@
+- name: Create group user
+  ansible.builtin.group:
+    name: user
+    state: present
+  become: yes
+  tags: group
+
+- name: Create users
+  ansible.builtin.user:
+    name: "{{item.name}}"
+    state: present
+    groups: "{{item.groups}}"
+  loop: "{{users}}"
+  become: yes
+  tags: user
+
+- name: Create .shh dir
+  ansible.builtin.file:
+    path: "/home/{{item.name}}/.ssh/authorized_keys"
+    state: directory
+    recurse: yes
+    owner: "{{item.name}}"
+    group: "{{item.name}}"
+    mode: '0600'
+  loop: "{{users}}"
+  become: yes
+
+- name: Copy ssh key
+  ansible.builtin.copy:
+    src: "../files/{{item.name}}/id_ed25519.pub"
+    dest: "/home/{{item.name}}/.ssh/authorized_keys"
+    owner: "{{item.name}}"
+    group: "{{item.name}}"
+  loop: "{{users}}"
+  become: yes
+  tags: system
