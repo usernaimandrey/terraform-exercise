@@ -1,0 +1,23 @@
+---
+- name: Update cahe CentOS
+  ansible.builtin.command: yum update
+  become: yes
+  tags: system
+
+- name : Insatll nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+  become: yes
+  tags: nginx
+
+- name: Install cowsay
+  ansible.builtin.yum:
+    name: cowsay
+    state: present
+  become: yes
+  tags: nginx
+  
+- ansible.builtin.shell: cowsay "This is server server_name!"
+  register: result
+  tags: nginx

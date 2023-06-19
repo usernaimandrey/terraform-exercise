@@ -1,0 +1,23 @@
+---
+- name: сreate directory
+  file:
+    path={{root_dir}}
+    state=directory
+  become: yes
+  tags: [system, nginx]
+
+  - name: update index
+  ansible.builtin.template:
+    src: ../files/index.html
+    dest: "{{root_dir}}/index.html" 
+  become: yes
+  tags: nginx
+
+- name: update nginx config
+  ansible.builtin.template:
+    src: ../files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+  become: yes
+  tags: nginx

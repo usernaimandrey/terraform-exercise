@@ -1,0 +1,10 @@
+---
+- name: Install nginx for Debian famaly
+  import_tasks: config.yml
+  import_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Install nginx for RedHat famaly
+  import_tasks: config.yml
+  import_tasks: centos.yml
+  when: ansible_os_family == "RedHat"

@@ -1,0 +1,4 @@
+roles:
+  - name: elct9620.rails
+    version: 0.1.1
+
