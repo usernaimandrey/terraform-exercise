@@ -78,3 +78,7 @@ variable "y_user_id" {
   type      = string
   sensitive = true
 }
+
+variable "meta_data" {
+  type = string
+}

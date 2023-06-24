@@ -64,7 +64,7 @@ resource "yandex_compute_instance" "appserver" {
   }
 
   metadata = {
-    user-data = "${file("./meta.txt")}"
+    user-data = "${file(var.meta_data)}"
     # ssh-keys = "centos:${file("~/.ssh/id_ed25519.pub")}"
   }
 }
