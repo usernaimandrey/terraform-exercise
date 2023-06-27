@@ -1,3 +1,11 @@
+include make-services-app.mk
+
+compose:
+	docker compose up -d
+
+compose-build:
+	docker-compose build
+
 setup-cloud:
 	terraform apply -var-file=secrets.tfvars
 
