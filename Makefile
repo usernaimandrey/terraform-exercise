@@ -19,7 +19,7 @@ create-token:
 	bin/y_create_token
 
 helth-check:
-	ansible all -i inventory.ini -u andery -m ping
+	ansible all -i inventory.ini -u $$USER -m ping
 
 ansible-playbook:
 	ansible-playbook $(P) -i inventory.ini -u $$USER -t $(T)
