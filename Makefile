@@ -19,7 +19,7 @@ create-token:
 	bin/y_create_token
 
 helth-check:
-	ansible all -i inventory.ini -u $$USER -m ping
+	ansible all -i inventory.ini --vault-password-file files/vault_pass -u $$USER -m ping
 
 ansible-playbook:
 	ansible-playbook $(P) -i inventory.ini -u $$USER -t $(T)
@@ -36,3 +36,6 @@ setup-app:
 
 configure-terraform:
 	ansible-playbook playbooks/terraform.yml -i inventory.ini --vault-password-file files/vault_pass  -u $$USER
+
+setup-environment:
+	ansible-playbook playbooks/environment.yml -i inventory.ini --vault-password-file files/vault_pass  -u $$USER

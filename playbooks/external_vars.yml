@@ -1,4 +1,5 @@
 ---
+ruby_version: 3.2.2
 root_dir: /var/tmp/www
 default_port: 8080
 users_group_1: 

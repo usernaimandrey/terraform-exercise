@@ -1,0 +1,14 @@
+- hosts: webservers
+  vars_files:
+    - external_vars.yml
+
+  tasks:
+    - name: get username
+      ansible.builtin.command: echo $USER
+      register: result
+
+    - name: install ruby
+      import_role:
+        name: ../roles/install_ruby
+      vars:
+        rbenv_user: "{{result.stdout}}"

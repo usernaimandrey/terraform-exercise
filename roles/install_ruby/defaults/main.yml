@@ -1,0 +1,11 @@
+---
+rbenv_version: v1.2.0
+rbenv_repo_path: https://github.com/rbenv/rbenv.git
+rbenv_ruby_build_repo_path: https://github.com/sstephenson/ruby-build.git
+rbenv_user: andery
+rbenv_root_path: "/home/{{ rbenv_user }}/.rbenv"
+rbenv_ruby_version: 3.2.2
+rails_version: 7.0.8
+rbenv_gems:
+  - bundler
+  - "rails -v {{rails_version}}"

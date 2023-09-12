@@ -1,0 +1,33 @@
+---
+
+- name: install deps
+  ansible.builtin.import_tasks:
+    file: dependencies.yml
+  tags: [rbenv]
+
+- name: install rbenv
+  ansible.builtin.import_tasks:
+    file: rbenv.yml
+  tags: [rbenv]
+
+- name: build ruby
+  ansible.builtin.import_tasks:
+    file: ruby-build.yml
+  tags: [rbenv]
+
+- name: Check if ruby {{ rbenv_ruby_version }} is installed
+  command: $SHELL -lc "rbenv versions | grep {{ rbenv_ruby_version }}"
+  register: is_ruby_installed
+  ignore_errors: yes
+  tags: [rbenv]
+
+- name: install ruby
+  ansible.builtin.import_tasks:
+    file: ruby.yml
+  when: is_ruby_installed.failed
+  tags: [rbenv]
+
+- name: install gems
+  ansible.builtin.import_tasks:
+    file: gems.yml
+  tags: [rbenv, gems]
