@@ -1,5 +1,5 @@
 galaxy_info:
-  author: "Gordon Shumway"
+  author: "Shlyapnikov Andrey"
   description: Install rbenv and ruby-build plugin for specified user.
   license: MIT
 
@@ -8,7 +8,7 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - trusty
+    - v1
 
   galaxy_tags:
     - rbenv

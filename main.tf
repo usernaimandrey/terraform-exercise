@@ -44,30 +44,30 @@ resource "yandex_compute_instance" "webserver" {
   }
 }
 
-resource "yandex_compute_instance" "appserver" {
-  name = var.y_instanse_name_2
+# resource "yandex_compute_instance" "appserver" {
+#   name = var.y_instanse_name_2
 
-  resources {
-    cores  = var.cores_count
-    memory = var.memory_count
-  }
+#   resources {
+#     cores  = var.cores_count
+#     memory = var.memory_count
+#   }
 
-  boot_disk {
-    initialize_params {
-      image_id = var.y_image_id_centos
-    }
-  }
+#   boot_disk {
+#     initialize_params {
+#       image_id = var.y_image_id_centos
+#     }
+#   }
 
-  network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
-    nat       = true
-  }
+#   network_interface {
+#     subnet_id = yandex_vpc_subnet.subnet-1.id
+#     nat       = true
+#   }
 
-  metadata = {
-    user-data = "${file(var.meta_data)}"
-    # ssh-keys = "centos:${file("~/.ssh/id_ed25519.pub")}"
-  }
-}
+#   metadata = {
+#     user-data = "${file(var.meta_data)}"
+#     # ssh-keys = "centos:${file("~/.ssh/id_ed25519.pub")}"
+#   }
+# }
 
 resource "yandex_vpc_network" "network-1" {
   name = var.y_network_name
@@ -88,10 +88,10 @@ output "external_ip_address_webserver" {
   value = yandex_compute_instance.webserver.network_interface.0.nat_ip_address
 }
 
-output "internal_ip_address_appserver" {
-  value = yandex_compute_instance.appserver.network_interface.0.ip_address
-}
+# output "internal_ip_address_appserver" {
+#   value = yandex_compute_instance.appserver.network_interface.0.ip_address
+# }
 
-output "external_ip_address_appserver" {
-  value = yandex_compute_instance.appserver.network_interface.0.nat_ip_address
-}
+# output "external_ip_address_appserver" {
+#   value = yandex_compute_instance.appserver.network_interface.0.nat_ip_address
+# }
