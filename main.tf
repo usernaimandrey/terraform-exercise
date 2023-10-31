@@ -95,3 +95,25 @@ output "external_ip_address_webserver" {
 # output "external_ip_address_appserver" {
 #   value = yandex_compute_instance.appserver.network_interface.0.nat_ip_address
 # }
+
+resource "yandex_dns_zone" "zone-1" {
+  name   = "anshlyapnikov-zone"
+  zone   =  var.host
+  public = true 
+}
+
+resource "yandex_dns_recordset" "anshlyapnikov" {
+  zone_id = yandex_dns_zone.zone-1.id
+  name = var.host
+  type = "A"
+  ttl = 200
+  data = [yandex_compute_instance.webserver.network_interface.0.nat_ip_address]
+}
+
+resource "yandex_dns_recordset" "www_anshlyapnikov" {
+  zone_id = yandex_dns_zone.zone-1.id
+  name = "www.${var.host}"
+  type = "A"
+  ttl = 200
+  data = [yandex_compute_instance.webserver.network_interface.0.nat_ip_address]
+}

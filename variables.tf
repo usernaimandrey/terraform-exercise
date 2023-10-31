@@ -82,3 +82,7 @@ variable "y_user_id" {
 variable "meta_data" {
   type = string
 }
+
+variable "host" {
+  type = string
+}
