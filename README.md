@@ -16,11 +16,11 @@ make configure-terraform
 Создайте токен для работы с Yandex:
 
 ```bash
-make create token
+make create-token
 ```
 
 Разверните инфраструктуру:
 
 ```bash
-make setup cloud
+make setup-cloud
 ```

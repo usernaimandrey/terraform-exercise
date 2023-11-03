@@ -39,3 +39,6 @@ configure-terraform:
 
 setup-environment:
 	ansible-playbook playbooks/environment.yml -i inventory.ini --vault-password-file files/vault_pass  -u $$USER
+
+edit-secrets:
+	ansible-vault edit group_vars/all/vault.yml
