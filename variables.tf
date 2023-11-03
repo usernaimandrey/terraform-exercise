@@ -16,10 +16,26 @@ variable "y_folder_id" {
   sensitive   = true
 }
 
+variable "y_service_account_id" {
+  description = "service account id"
+  type        = string
+  sensitive   = true
+}
+
 variable "y_zone" {
   description = "zone for virtula machine"
   type        = string
   default     = "ru-central1-a"
+}
+
+variable "y_zone_b" {
+  type = string
+  default = "ru-central1-b"
+}
+
+variable "y_zone_c" {
+  type = string
+  default = "ru-central1-c"
 }
 
 variable "y_image_id_ubuntu" {
@@ -34,22 +50,52 @@ variable "y_image_id_centos" {
   default     = "fd8dgtuscndkp3jmdb82"
 }
 
+variable "y_image_id_container" {
+  description = "image with docker"
+  type        = string
+  default     = "fd8le4hl5jhi2qdrtpv5"
+}
+
 variable "y_network_name" {
   description = "network name"
   type        = string
   default     = "network1"
 }
 
-variable "subnet_name" {
+variable "subnet_name1" {
   description = "subnet name"
   type        = string
   default     = "subnet1"
 }
 
-variable "y_v4_cidr_blocks" {
+variable "subnet_name2" {
+  description = "subnet name"
+  type        = string
+  default     = "subnet2"
+}
+
+variable "subnet_name3" {
+  description = "subnet name"
+  type        = string
+  default     = "subnet3"
+}
+
+variable "y_v4_cidr_blocks1" {
   description = "block ip"
   type        = list(string)
-  default     = [ "192.168.10.0/24"]
+  default     = [ "192.168.1.0/24"]
+}
+
+variable "y_v4_cidr_blocks2" {
+  description = "block ip"
+  type        = list(string)
+  default     = [ "192.168.2.0/24"]
+}
+
+variable "y_v4_cidr_blocks3" {
+  description = "block ip"
+  type        = list(string)
+  default     = [ "192.168.3.0/24"]
 }
 
 variable "y_instanse_name_1" {
@@ -83,6 +129,10 @@ variable "meta_data" {
   type = string
 }
 
-variable "host" {
+variable "declaration" {
+  type = string
+}
+
+variable "domain" {
   type = string
 }
