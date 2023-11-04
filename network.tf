@@ -76,6 +76,18 @@ resource "yandex_vpc_security_group" "dev-vm-sg" {
   }
 }
 
+resource "yandex_vpc_security_group" "dev_pg" {
+  name = "dev-pg"
+  network_id = yandex_vpc_network.network-1.id
+
+  ingress {
+    description = "Postgres"
+    port        = 6432
+    protocol = "TCP"
+    v4_cidr_blocks = [ "0.0.0.0/0" ]
+  }
+}
+
 resource "yandex_alb_http_router" "dev-router" {
   name   = "dev-router"
 }

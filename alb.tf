@@ -1,7 +1,7 @@
 resource "yandex_alb_load_balancer" "dev-1" {
   name               = "dev-1"
   network_id         = yandex_vpc_network.network-1.id
-  security_group_ids = [yandex_vpc_security_group.dev-sg.id]
+  # security_group_ids = [yandex_vpc_security_group.dev-sg.id]
 
   allocation_policy {
     location {
