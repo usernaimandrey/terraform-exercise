@@ -5,4 +5,4 @@ users:
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDq/p8vU+xa+87FrGeSo6sZc7iN8TKguo9FdSbfy2p7yaw771QcKc5nRFbqJUpHSRhRsU7KY1jQgWjunJE+AHg/x/1WX6Ak3j/6vekfiV5ZDxoxt38THaHIRHcgqRAzVYz9Q0zwEEd3yDQPPDwqhSlCj1eGxpMrizdoE09iTM3Px8HSeQtROSNjtxKcUd2Et3bkv3WaY1dnHHtRXhrYheisaZ1nMs3jhtFk8yQJ+oyLwZhWz2VtNEGavZD0Kk2CxtZImKN9QzaYjxIPJgoxZ4BitvLL/IBaFbzyCn2FrrCA6R6fA6O+di1SKUcFJPieGs58alVlr3DT6Z8+DHOrxXF5wBZqtQGWSaU4T2TJpf7Nwt2p/vAr1lVeRwCgC4S+0w1DootgzaPvbCYsnJ5VffSdyrjfwc0j+EzD3G25XZhBXcBw3tYuLpPmy7zH9znjDySSPTCvn0pspsu8k4qlBc7Lcx/AN+LVxu4wGJoFbA9URKdxb3eaEciaHnEITgCWdqE= andery@andery-shlyapnikov
+      
