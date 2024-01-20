@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - template:
+        src: ../files/datadog/secrets.tfvars.j2
+        dest: ../datadog/secrets.tfvars

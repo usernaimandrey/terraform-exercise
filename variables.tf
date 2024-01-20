@@ -38,18 +38,6 @@ variable "y_zone_c" {
   default = "ru-central1-c"
 }
 
-variable "y_image_id_ubuntu" {
-  description = "image ubuntu"
-  type        = string
-  default     = "fd807ed79a4kkqfvd1mb"
-}
-
-variable "y_image_id_centos" {
-  description = "image centos"
-  type        = string
-  default     = "fd8dgtuscndkp3jmdb82"
-}
-
 variable "y_image_id_container" {
   description = "image with docker"
   type        = string
@@ -137,9 +125,18 @@ variable "domain" {
   type = string
 }
 
-variable "db_user" {
+variable "db_cluster_name" {
   type      = string
   sensitive = true
+}
+
+variable "db_host_name" {
+  type      = string
+  sensitive = true
+}
+
+variable "db_user" {
+  type      = string
 }
 
 variable "db_password" {

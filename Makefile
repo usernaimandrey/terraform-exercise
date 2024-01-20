@@ -37,6 +37,9 @@ setup-app:
 configure-terraform:
 	ansible-playbook playbooks/terraform.yml -i inventory.ini --vault-password-file files/vault_pass  -u $$USER
 
+configure-datadog:
+	ansible-playbook playbooks/datadog.yml -i inventory.ini --vault-password-file files/vault_pass
+
 setup-environment:
 	ansible-playbook playbooks/environment.yml -i inventory.ini --vault-password-file files/vault_pass  -u $$USER
 

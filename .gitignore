@@ -6,3 +6,4 @@ vault_pass
 meta.*
 !meta.txt.j2
 !secrets.tfvars.j2
+.terraform/
